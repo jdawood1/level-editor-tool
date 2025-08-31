@@ -1,0 +1,25 @@
+{
+  "name": "demo",
+  "width": 20,
+  "height": 12,
+  "objects": [
+    {
+      "type": "wall",
+      "x": 3,
+      "y": 5,
+      "meta": {}
+    },
+    {
+      "type": "coin",
+      "x": 7,
+      "y": 2,
+      "meta": {}
+    },
+    {
+      "type": "enemy",
+      "x": 10,
+      "y": 6,
+      "meta": {}
+    }
+  ]
+}

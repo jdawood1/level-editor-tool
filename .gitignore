@@ -1,0 +1,32 @@
+# Virtual environment
+.venv/
+venv/
+ENV/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+
+# IDE/editor configs
+.idea/
+.vscode/
+
+# Data files (ignore generated, but keep example)
+data/*.json
+!data/demo.json
+
+# Logs
+*.log
+
+# Coverage/test outputs
+htmlcov/
+.tox/
+.coverage
+.pytest_cache/
