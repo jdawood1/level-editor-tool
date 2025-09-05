@@ -21,7 +21,9 @@ def use_tmp_dirs(tmp_path, monkeypatch):
     monkeypatch.setattr(core_mod, "BUILD_DIR", build_dir, raising=False)
 
     # Point telemetry to a temp CSV
-    monkeypatch.setattr(telemetry_mod, "LOG", build_dir / "telemetry.csv", raising=False)
+    monkeypatch.setattr(
+        telemetry_mod, "LOG", build_dir / "telemetry.csv", raising=False
+    )
 
     return data_dir, build_dir
 

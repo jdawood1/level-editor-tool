@@ -1,11 +1,10 @@
 import json
 import time
 from pathlib import Path
-from .models import Level, LevelObject
-from .telemetry import log_event
-
 from typing import Optional
-from .models import ObjectType
+
+from .models import Level, LevelObject, ObjectType
+from .telemetry import log_event
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 BUILD_DIR = Path(__file__).resolve().parent.parent / "build"
@@ -65,14 +64,15 @@ def stats(level_path: Path) -> dict:
         "by_type": count_by_type,
     }
 
+
 def remove_object(
-        level_path: Path,
-        *,
-        index: Optional[int] = None,
-        type: Optional[ObjectType] = None,
-        x: Optional[int] = None,
-        y: Optional[int] = None,
-        remove_all: bool = False,
+    level_path: Path,
+    *,
+    index: Optional[int] = None,
+    type: Optional[ObjectType] = None,
+    x: Optional[int] = None,
+    y: Optional[int] = None,
+    remove_all: bool = False,
 ) -> int:
     """
     Remove by either:
@@ -89,8 +89,14 @@ def remove_object(
             raise IndexError(f"index {index} out of range (0..{len(level.objects)-1})")
         del level.objects[index]
         # validate + persist
-        Path(level_path).write_text(Level(**level.model_dump()).model_dump_json(indent=2))
-        log_event("remove_object", time.time() - t0, {"level": Path(level_path).name, "index": index})
+        Path(level_path).write_text(
+            Level(**level.model_dump()).model_dump_json(indent=2)
+        )
+        log_event(
+            "remove_object",
+            time.time() - t0,
+            {"level": Path(level_path).name, "index": index},
+        )
         return 1
 
     # Must have full key for match-based removal
@@ -100,7 +106,7 @@ def remove_object(
     removed = 0
     kept = []
     for obj in level.objects:
-        is_match = (obj.type == type and obj.x == x and obj.y == y)
+        is_match = obj.type == type and obj.x == x and obj.y == y
         if is_match and (remove_all or removed == 0):
             removed += 1
             if not remove_all:
@@ -113,7 +119,9 @@ def remove_object(
     if removed:
         level.objects = kept
         # validate + persist
-        Path(level_path).write_text(Level(**level.model_dump()).model_dump_json(indent=2))
+        Path(level_path).write_text(
+            Level(**level.model_dump()).model_dump_json(indent=2)
+        )
 
     log_event(
         "remove_object",
@@ -127,5 +135,5 @@ def remove_object(
             "all": remove_all,
             "removed": removed,
         },
-        )
+    )
     return removed

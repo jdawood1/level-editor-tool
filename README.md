@@ -10,11 +10,11 @@ Developer-focused tooling prototype demonstrating **workflow automation, data ex
 ## Highlights
 - **Level creation & editing:** Define tiles/objects, build levels, export to JSON
 - **Validation:** Pydantic v2 schema validation (bounds, dimensions, types)
-- **CLI commands:**  
-  - `new-level` — create levels  
-  - `add-object` — add objects to levels  
-  - `remove-object` — remove by index or (type, x, y) match  
-  - `stats` — summary stats by object type  
+- **CLI commands:**
+  - `new-level` — create levels
+  - `add-object` — add objects to levels
+  - `remove-object` — remove by index or (type, x, y) match
+  - `stats` — summary stats by object type
   - `export` — produce final JSON version
 - **Telemetry:** CSV log of operations (timestamp, action, duration)
 - **Tkinter GUI:** Add/remove objects visually, open/export levels
@@ -93,11 +93,11 @@ level-editor-tool/
 ---
 
 ## Roadmap
-- [x] `remove-object` CLI command  
-- [x] Tkinter GUI wrapper  
-- [ ] Richer validation errors (duplicate objects, invalid coords)  
-- [ ] Schema versioning + migrations  
-- [ ] Drag/drop GUI editing, keyboard shortcuts  
+- [x] `remove-object` CLI command
+- [x] Tkinter GUI wrapper
+- [ ] Richer validation errors (duplicate objects, invalid coords)
+- [ ] Schema versioning + migrations
+- [ ] Drag/drop GUI editing, keyboard shortcuts
 
 ---
 

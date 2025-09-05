@@ -1,4 +1,5 @@
 import pytest
+
 from editor.models import Level, LevelObject
 
 
@@ -32,7 +33,9 @@ def test_width_height_positive():
 
 def test_roundtrip_dump_load():
     # Ensure model_dump is fully reconstructible
-    lvl = Level(name="z", width=3, height=2, objects=[LevelObject(type="door", x=0, y=1)])
+    lvl = Level(
+        name="z", width=3, height=2, objects=[LevelObject(type="door", x=0, y=1)]
+    )
     dumped = lvl.model_dump()
     lvl2 = Level(**dumped)
     assert lvl2.name == "z"
