@@ -4,20 +4,14 @@
   "height": 12,
   "objects": [
     {
-      "type": "wall",
-      "x": 3,
-      "y": 5,
-      "meta": {}
-    },
-    {
       "type": "coin",
-      "x": 7,
-      "y": 2,
+      "x": 3,
+      "y": 4,
       "meta": {}
     },
     {
       "type": "enemy",
-      "x": 10,
+      "x": 5,
       "y": 6,
       "meta": {}
     }
