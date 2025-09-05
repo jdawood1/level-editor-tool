@@ -1,18 +1,24 @@
-# Level Editor Tool (Python CLI) — Exporter & Telemetry
+# Level Editor Tool (Python CLI + Tkinter GUI) — Exporter & Telemetry
 
 [![CI](https://github.com/jdawood1/level-editor-tool/actions/workflows/ci.yml/badge.svg)](https://github.com/jdawood1/level-editor-tool/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-Developer-focused CLI prototype that demonstrates **workflow tooling, data exporters, and telemetry** — the kinds of skills relevant to engine/tools work.
+Developer-focused tooling prototype demonstrating **workflow automation, data exporters, telemetry logging, and GUI integration** — skills relevant to engine/tools work.
 
 ---
 
 ## Highlights
-- Define tiles/objects, build levels, and export to JSON
-- Validates schema via Pydantic (v2)
-- CLI subcommands: `new-level`, `add-object`, `export`, `stats`
-- Telemetry: writes CSV of operations (timestamp, action, duration)
-- Unit tests (pytest) + lint/format (black/ruff)
-- GitHub Actions CI (lint + tests)
+- **Level creation & editing:** Define tiles/objects, build levels, export to JSON
+- **Validation:** Pydantic v2 schema validation (bounds, dimensions, types)
+- **CLI commands:**
+  - `new-level` — create levels
+  - `add-object` — add objects to levels
+  - `remove-object` — remove by index or (type, x, y) match
+  - `stats` — summary stats by object type
+  - `export` — produce final JSON version
+- **Telemetry:** CSV log of operations (timestamp, action, duration)
+- **Tkinter GUI:** Add/remove objects visually, open/export levels
+- **Unit tests:** Pytest + GitHub Actions CI (tests, lint, formatting)
 
 ---
 
@@ -31,6 +37,10 @@ python -m editor.cli add-object --level data/demo.json --type wall --x 3 --y 5
 python -m editor.cli add-object --level data/demo.json --type coin --x 7 --y 2
 python -m editor.cli add-object --level data/demo.json --type enemy --x 10 --y 6
 
+# remove objects (index or match mode)
+python -m editor.cli remove-object --level data/demo.json --index 0
+python -m editor.cli remove-object --level data/demo.json --type coin --x 7 --y 2 --all
+
 # see stats + export
 python -m editor.cli stats --level data/demo.json
 python -m editor.cli export --level data/demo.json --out build/demo_level.json
@@ -43,6 +53,23 @@ python -m editor.cli export --level data/demo.json --out build/demo_level.json
 
 ---
 
+## Tkinter GUI
+
+```bash
+# launch GUI
+python -m editor.gui data/demo.json
+```
+
+![GUI Example](example_gui.png)
+
+Features:
+- Open & Export buttons
+- Object table (Type, X, Y)
+- Add & Remove controls
+- Telemetry logging for GUI actions
+
+---
+
 ## Repo Structure
 
 ```
@@ -50,11 +77,12 @@ level-editor-tool/
   editor/
     cli.py        # CLI entrypoint (Click)
     core.py       # core logic
+    gui.py        # Tkinter GUI wrapper
     models.py     # Pydantic models (Level, LevelObject)
     telemetry.py  # telemetry logger
   tests/
-    test_core.py
-    test_models.py
+    test_core.py  # core logic tests
+    test_models.py # model validation tests
   data/           # working levels (demo.json committed as example)
   build/          # exports + telemetry logs
   requirements.txt
@@ -65,10 +93,11 @@ level-editor-tool/
 ---
 
 ## Roadmap
-- [ ] `remove-object` CLI command
-- [ ] Tkinter GUI wrapper
+- [x] `remove-object` CLI command
+- [x] Tkinter GUI wrapper
 - [ ] Richer validation errors (duplicate objects, invalid coords)
 - [ ] Schema versioning + migrations
+- [ ] Drag/drop GUI editing, keyboard shortcuts
 
 ---
 
